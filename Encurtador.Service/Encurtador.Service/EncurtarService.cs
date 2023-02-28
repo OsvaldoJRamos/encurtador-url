@@ -1,7 +1,7 @@
-﻿using Encurtador.Data.Repositories.Interfaces;
+﻿
+using Encurtador.Data.Repositories.Interfaces;
 using Encurtador.Domain.Dtos.Request;
 using Encurtador.Domain.Entities;
-using System.Reflection.Metadata.Ecma335;
 
 namespace Encurtador.Service
 {
