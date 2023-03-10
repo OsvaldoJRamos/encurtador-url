@@ -1,4 +1,4 @@
-﻿namespace Encurtador.Domain.Entities
+﻿namespace Encurtador.Domain
 {
     public static class GenerateRandom
     {
