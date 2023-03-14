@@ -36,22 +36,10 @@ namespace Encurtador.API.Controllers
             try
             {
                 var urlOriginal = await _encurtarService.GetUrlOriginalAsync(urlEncurtada, cancellationToken);
-                return Ok(urlOriginal);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
 
-        [HttpPut]
-        [Route("click")]
-        public async Task<IActionResult> AdicionarClickAsync(string urlEncurtada, CancellationToken cancellationToken)
-        {
-            try
-            {
-                await _encurtarService.AdicionarClickAsync(urlEncurtada, cancellationToken);
-                return Ok();
+                _encurtarService.AdicionarClickAsync(urlEncurtada, cancellationToken);
+
+                return Ok(urlOriginal);
             }
             catch (Exception ex)
             {
