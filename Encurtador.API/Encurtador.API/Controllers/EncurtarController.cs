@@ -30,20 +30,23 @@ namespace Encurtador.API.Controllers
         }
 
         [HttpGet]
-        [Route("urlOriginal")]
-        public async Task<IActionResult> GetUrlOriginalAsync(string urlEncurtada, CancellationToken cancellationToken)
+        [Route("Encurtado")]
+        public async Task<IActionResult> GetEncurtadoAsync(string urlEncurtada, CancellationToken cancellationToken)
         {
             try
             {
-                var urlOriginal = await _encurtarService.GetUrlOriginalAsync(urlEncurtada, cancellationToken);
+                var encurtado = await _encurtarService.GetEncurtadoAsync(urlEncurtada, cancellationToken);
 
-                _encurtarService.AdicionarClickAsync(urlEncurtada, cancellationToken);
+                if (encurtado is null)
+                {
+                    return BadRequest(new { mensagem = "Não encontrado!" });
+                }
 
-                return Ok(urlOriginal);
+                return Ok(encurtado);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { mensagem = ex.Message });
             }
         }
 
@@ -53,7 +56,8 @@ namespace Encurtador.API.Controllers
         {
             try
             {
-                var urlOriginal = await _encurtarService.GetUrlOriginalAsync(urlEncurtada, cancellationToken);
+                var encurtado = await _encurtarService.GetEncurtadoAsync(urlEncurtada, cancellationToken);
+                var urlOriginal = "";
 
                 if (!string.IsNullOrEmpty(urlOriginal))
                 {
@@ -61,11 +65,11 @@ namespace Encurtador.API.Controllers
                     return Redirect(urlOriginal);
                 }
 
-                return Redirect("https://encurtador.app/");
+                return Redirect($"https://encurtador.app/{urlEncurtada}");
             }
             catch (Exception ex)
             {
-                return Redirect("https://encurtador.app/");
+                return Redirect($"https://encurtador.app/{urlEncurtada}");
             }
         }
     }

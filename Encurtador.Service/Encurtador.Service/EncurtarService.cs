@@ -23,10 +23,10 @@ namespace Encurtador.Service
             return encurtado;
         }
 
-        public async Task<string?> GetUrlOriginalAsync(string urlEncurtada, CancellationToken cancellationToken)
+        public async Task<Encurtado> GetEncurtadoAsync(string urlEncurtada, CancellationToken cancellationToken)
         {
             var encurtado = await _encurtarRepository.GetByUrlEncurtadaAsync(urlEncurtada, cancellationToken);
-            return encurtado?.UrlOriginal;
+            return encurtado;
         }
 
         public async Task AdicionarClickAsync(string urlEncurtada, CancellationToken cancellationToken)
