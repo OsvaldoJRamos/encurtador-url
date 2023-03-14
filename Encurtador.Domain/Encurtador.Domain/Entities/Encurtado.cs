@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +9,9 @@ namespace Encurtador.Domain.Entities
 {
     public class Encurtado
     {
-        public Guid Id { get; private set; }
+        [Key]
+        [StringLength(4010)]
+        public int Id { get; private set; }
         public string UrlOriginal { get; private set; }
         public string UrlEncurtada { get; private set; }
         public int NumeroCliques { get; private set; }
