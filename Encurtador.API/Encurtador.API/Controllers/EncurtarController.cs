@@ -61,7 +61,7 @@ namespace Encurtador.API.Controllers
                 if (encurtado is not null && !string.IsNullOrEmpty(encurtado.UrlEncurtada))
                 {
                     await _encurtarService.AdicionarClickAsync(urlEncurtada, cancellationToken);
-                    return Redirect(encurtado.UrlEncurtada);
+                    return Redirect(encurtado.UrlOriginal);
                 }
 
                 return Redirect($"https://encurtador.app/{urlEncurtada}");
