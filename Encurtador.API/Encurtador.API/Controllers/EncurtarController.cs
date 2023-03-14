@@ -48,20 +48,24 @@ namespace Encurtador.API.Controllers
         }
 
         [HttpGet]
-        [Route("urlOriginal/Redirect")]
+        [Route("{urlEncurtada}")]
         public async Task<RedirectResult?> RedirectToUrlOriginalAsync(string urlEncurtada, CancellationToken cancellationToken)
         {
             try
             {
                 var urlOriginal = await _encurtarService.GetUrlOriginalAsync(urlEncurtada, cancellationToken);
 
-                _encurtarService.AdicionarClickAsync(urlEncurtada, cancellationToken);
+                if (!string.IsNullOrEmpty(urlOriginal))
+                {
+                    _encurtarService.AdicionarClickAsync(urlEncurtada, cancellationToken);
+                    return Redirect(urlOriginal);
+                }
 
-                return Redirect(urlOriginal);
+                return Redirect("https://encurtador.app/");
             }
             catch (Exception ex)
             {
-                return null;
+                return Redirect("https://encurtador.app/");
             }
         }
     }
