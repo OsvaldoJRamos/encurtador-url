@@ -57,12 +57,11 @@ namespace Encurtador.API.Controllers
             try
             {
                 var encurtado = await _encurtarService.GetEncurtadoAsync(urlEncurtada, cancellationToken);
-                var urlOriginal = "";
 
-                if (!string.IsNullOrEmpty(urlOriginal))
+                if (encurtado is not null && !string.IsNullOrEmpty(encurtado.UrlEncurtada))
                 {
-                    _encurtarService.AdicionarClickAsync(urlEncurtada, cancellationToken);
-                    return Redirect(urlOriginal);
+                    await _encurtarService.AdicionarClickAsync(urlEncurtada, cancellationToken);
+                    return Redirect(encurtado.UrlEncurtada);
                 }
 
                 return Redirect($"https://encurtador.app/{urlEncurtada}");
