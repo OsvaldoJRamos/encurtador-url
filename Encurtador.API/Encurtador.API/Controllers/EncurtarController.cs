@@ -7,11 +7,12 @@ namespace Encurtador.API.Controllers
     public class EncurtarController : BaseApiController
     {
         private readonly IEncurtarService _encurtarService;
+        private readonly IConfiguration _configuration;
 
-        public EncurtarController(IEncurtarService encurtarService)
+        public EncurtarController(IEncurtarService encurtarService, IConfiguration configuration)
         {
             _encurtarService = encurtarService;
-
+            _configuration = configuration;
         }
 
         [HttpPost]
@@ -64,11 +65,11 @@ namespace Encurtador.API.Controllers
                     return Redirect(encurtado.UrlOriginal);
                 }
 
-                return Redirect($"https://encurtador.app/{urlEncurtada}");
+                return Redirect($"{_configuration.GetValue<string>("EncurtadorSite")}/{urlEncurtada}");
             }
             catch (Exception ex)
             {
-                return Redirect($"https://encurtador.app/{urlEncurtada}");
+                return Redirect($"{_configuration.GetValue<string>("EncurtadorSite")}/{urlEncurtada}");
             }
         }
     }

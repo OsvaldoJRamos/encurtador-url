@@ -1,5 +1,6 @@
 using Encurtador.API.Configuration;
 using Encurtador.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -46,6 +47,17 @@ builder.Services.RegisterRepositories();
 
 var app = builder.Build();
 
+app.Use(async (context, next) =>
+{
+    if (string.Equals(context.Request.Path.Value, "/"))
+    {
+        context.Response.Redirect(builder.Configuration.GetSection("EncurtadorSite").Value);
+        return;
+    }
+
+    await next();
+});
+
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 //{
@@ -60,5 +72,6 @@ app.UseCors(defaultCors);
 app.UseAuthorization();
 
 app.MapControllers();
+
 
 app.Run();
