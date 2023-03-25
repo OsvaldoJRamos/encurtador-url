@@ -24,5 +24,9 @@
     <ProjectReference Include="..\Encurtador.Domain\Encurtador.Domain\Encurtador.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 
 </Project>

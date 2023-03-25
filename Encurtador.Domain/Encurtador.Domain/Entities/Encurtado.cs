@@ -9,18 +9,21 @@ namespace Encurtador.Domain.Entities
 {
     public class Encurtado
     {
-        [Key]
-        [StringLength(4010)]
         public int Id { get; private set; }
         public string UrlOriginal { get; private set; }
         public string UrlEncurtada { get; private set; }
         public int NumeroCliques { get; private set; }
         public DateTime DataCriacao { get; private set; }
         public DateTime DataExpiracao { get; private set; }
+        public virtual ICollection<Click> Clicks { get; private set; } = new List<Click>();
 
-        public void AdicionarClick()
+        public Click AdicionarClick()
         {
             NumeroCliques++;
+
+            var click = new Click(this.Id);
+            Clicks.Add(click);
+            return click;
         }
 
         public Encurtado(string urlOriginal, int diasParaExpirar)

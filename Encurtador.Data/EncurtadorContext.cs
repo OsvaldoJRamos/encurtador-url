@@ -13,6 +13,7 @@ namespace Encurtador.Data
         }
 
         public virtual DbSet<Encurtado> Encurtado { get; set; }
+        public virtual DbSet<Click> Click { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
