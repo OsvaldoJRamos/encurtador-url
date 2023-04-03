@@ -1,5 +1,5 @@
 using Encurtador.Domain.Dtos.Request;
-using Encurtador.Service;
+using Encurtador.Service.Interfaces;
 
 namespace Encurtador.Test
 {

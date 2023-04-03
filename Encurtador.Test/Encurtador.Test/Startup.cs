@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.Sqlite;
 using Encurtador.Domain.Dtos.Request;
+using Encurtador.Service.Interfaces;
 
 namespace Encurtador.Test
 {
@@ -25,6 +26,7 @@ namespace Encurtador.Test
             dbContext.Database.EnsureCreated();            
 
             services.AddScoped<IEncurtarRepository>(a => new EncurtarRepository(dbContext));
+            services.AddScoped<IEstatisticasRepository>(a => new EstatisticasRepository(dbContext));
             services.AddScoped<IEncurtarService, EncurtarService>();
 
         }

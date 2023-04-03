@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Encurtador.Data.Repositories
 {
-    public class EncurtarRepository : RepositoryBase<Encurtado, Guid>, IEncurtarRepository
+    public class EncurtarRepository : RepositoryBase<Encurtado, int>, IEncurtarRepository
     {
         public EncurtarRepository(EncurtadorContext context) : base(context)
         {

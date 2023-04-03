@@ -21,7 +21,7 @@ namespace Encurtador.Domain.Entities
         {
             NumeroCliques++;
 
-            var click = new Click(this.Id);
+            var click = new Click();
             Clicks.Add(click);
             return click;
         }

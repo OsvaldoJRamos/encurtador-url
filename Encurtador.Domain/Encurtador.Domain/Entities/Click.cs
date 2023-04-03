@@ -6,12 +6,11 @@ namespace Encurtador.Domain.Entities
     {
         public long Id { get; private set; }
         public DateTime Data { get; private set; }
+        public virtual Encurtado Encurtado { get; set; }
 
-        public Click(long encurtadoId)
+        public Click()
         {
             Data = DateTime.Now;
         }
-
-        protected Click() { }
     }
 }

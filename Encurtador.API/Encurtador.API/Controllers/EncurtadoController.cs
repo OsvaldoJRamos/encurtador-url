@@ -1,15 +1,16 @@
 ﻿using Encurtador.Domain.Dtos.Request;
 using Encurtador.Service;
+using Encurtador.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Encurtador.API.Controllers
 {
-    public class EncurtarController : BaseApiController
+    public class EncurtadoController : BaseApiController
     {
         private readonly IEncurtarService _encurtarService;
         private readonly IConfiguration _configuration;
 
-        public EncurtarController(IEncurtarService encurtarService, IConfiguration configuration)
+        public EncurtadoController(IEncurtarService encurtarService, IConfiguration configuration)
         {
             _encurtarService = encurtarService;
             _configuration = configuration;
@@ -31,7 +32,7 @@ namespace Encurtador.API.Controllers
         }
 
         [HttpGet]
-        [Route("Encurtado")]
+        [Route("Encurtado/{urlEncurtada}")]
         public async Task<IActionResult> GetEncurtadoAsync(string urlEncurtada, CancellationToken cancellationToken)
         {
             try
@@ -48,28 +49,6 @@ namespace Encurtador.API.Controllers
             catch (Exception ex)
             {
                 return BadRequest(new { mensagem = ex.Message });
-            }
-        }
-
-        [HttpGet]
-        [Route("{urlEncurtada}")]
-        public async Task<RedirectResult?> RedirectToUrlOriginalAsync(string urlEncurtada, CancellationToken cancellationToken)
-        {
-            try
-            {
-                var encurtado = await _encurtarService.GetEncurtadoAsync(urlEncurtada, cancellationToken);
-
-                if (encurtado is not null && !string.IsNullOrEmpty(encurtado.UrlEncurtada))
-                {
-                    await _encurtarService.AdicionarClickAsync(urlEncurtada, cancellationToken);
-                    return Redirect(encurtado.UrlOriginal);
-                }
-
-                return Redirect($"{_configuration.GetValue<string>("EncurtadorSite")}/{urlEncurtada}");
-            }
-            catch (Exception ex)
-            {
-                return Redirect($"{_configuration.GetValue<string>("EncurtadorSite")}/{urlEncurtada}");
             }
         }
     }

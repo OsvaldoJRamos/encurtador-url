@@ -1,16 +1,20 @@
 ﻿
 using Encurtador.Data.Repositories.Interfaces;
 using Encurtador.Domain.Dtos.Request;
+using Encurtador.Domain.Dtos.Response;
 using Encurtador.Domain.Entities;
+using Encurtador.Service.Interfaces;
 
 namespace Encurtador.Service
 {
     public class EncurtarService : IEncurtarService
     {
         private readonly IEncurtarRepository _encurtarRepository;
-        public EncurtarService(IEncurtarRepository encurtarRepository)
+        private readonly IEstatisticasRepository _clickRepository;
+        public EncurtarService(IEncurtarRepository encurtarRepository, IEstatisticasRepository clickRepository)
         {
             _encurtarRepository = encurtarRepository;
+            _clickRepository = clickRepository;
         }
 
         public async Task<Encurtado> EncurtarAsync(EncurtarRequestDto request, CancellationToken cancellationToken)

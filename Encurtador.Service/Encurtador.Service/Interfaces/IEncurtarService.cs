@@ -1,7 +1,7 @@
 ﻿using Encurtador.Domain.Dtos.Request;
 using Encurtador.Domain.Entities;
 
-namespace Encurtador.Service
+namespace Encurtador.Service.Interfaces
 {
     public interface IEncurtarService
     {
