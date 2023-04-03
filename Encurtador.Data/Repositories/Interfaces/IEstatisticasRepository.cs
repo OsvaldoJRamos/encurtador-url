@@ -6,8 +6,6 @@ namespace Encurtador.Data.Repositories.Interfaces
 {
     public interface IEstatisticasRepository : IRepositoryBase<Click, int>
     {
-        Task<IEnumerable<ClickDto>> GetClicksPorHoraAsync(GetClicksPorHoraDto filter, CancellationToken cancellationToken);
-        Task<IEnumerable<ClickDto>> GetClicksPorDiaAsync(GetClicksPorDiaDto filter, CancellationToken cancellationToken);
-        Task<IEnumerable<ClickDto>> GetClicksPorMesAsync(GetClicksPorMesDto filter, CancellationToken cancellationToken);      
+        IQueryable<Click> GetClicsAsync(int? dia = null, int? mes = null, int? ano = null, string? urlEncurtada = null);   
     }
 }

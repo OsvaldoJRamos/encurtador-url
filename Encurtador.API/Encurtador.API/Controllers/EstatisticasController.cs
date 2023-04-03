@@ -1,5 +1,5 @@
 ﻿using Encurtador.Domain.Dtos.Request;
-using Encurtador.Service;
+using Encurtador.Domain.Dtos.Response;
 using Encurtador.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,7 +11,7 @@ namespace Encurtador.API.Controllers
         private readonly IConfiguration _configuration;
 
         public ClicksController(
-            IEstatisticasService estatisticaService, 
+            IEstatisticasService estatisticaService,
             IConfiguration configuration)
         {
             _estatisticaService = estatisticaService;
@@ -19,6 +19,8 @@ namespace Encurtador.API.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<ClickDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Route("Clicks/Hora")]
         public async Task<IActionResult> GetClicksPorHoraAsync([FromQuery] GetClicksPorHoraDto filter, CancellationToken cancellationToken)
         {
@@ -34,12 +36,14 @@ namespace Encurtador.API.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<ClicksPorDiaDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Route("Clicks/Dia")]
         public async Task<IActionResult> GetClicksPorDiaAsync([FromQuery] GetClicksPorDiaDto filter, CancellationToken cancellationToken)
         {
             try
             {
-                var clicks = await _estatisticaService.GetClicksPorDiaAsync(filter, cancellationToken);
+                var clicks = _estatisticaService.GetClicksPorDiaAsync(filter, cancellationToken);
                 return Ok(clicks);
             }
             catch (Exception ex)
@@ -49,6 +53,8 @@ namespace Encurtador.API.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<ClickDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Route("Clicks/Mes")]
         public async Task<IActionResult> GetClicksPorMesAsync([FromQuery] GetClicksPorMesDto filter, CancellationToken cancellationToken)
         {

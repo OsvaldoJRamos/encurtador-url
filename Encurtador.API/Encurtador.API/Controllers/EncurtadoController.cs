@@ -1,5 +1,5 @@
 ﻿using Encurtador.Domain.Dtos.Request;
-using Encurtador.Service;
+using Encurtador.Domain.Entities;
 using Encurtador.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +17,8 @@ namespace Encurtador.API.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(Encurtado), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Route("[controller]")]
         public async Task<IActionResult> CreateAsync([FromBody] EncurtarRequestDto request, CancellationToken cancellationToken)
         {
@@ -32,6 +34,8 @@ namespace Encurtador.API.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(Encurtado), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Route("Encurtado/{urlEncurtada}")]
         public async Task<IActionResult> GetEncurtadoAsync(string urlEncurtada, CancellationToken cancellationToken)
         {

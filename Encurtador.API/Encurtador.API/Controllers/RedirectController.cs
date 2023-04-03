@@ -1,4 +1,5 @@
-﻿using Encurtador.Service.Interfaces;
+﻿using Encurtador.Domain.Dtos.Response;
+using Encurtador.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Encurtador.API.Controllers
@@ -15,6 +16,7 @@ namespace Encurtador.API.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status308PermanentRedirect)]
         [Route("{urlEncurtada}")]
         public async Task<RedirectResult?> RedirectToUrlOriginalAsync(string urlEncurtada, CancellationToken cancellationToken)
         {
