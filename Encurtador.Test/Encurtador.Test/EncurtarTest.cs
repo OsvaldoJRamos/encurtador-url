@@ -3,11 +3,11 @@ using Encurtador.Service.Interfaces;
 
 namespace Encurtador.Test
 {
-    public class UnitTest1
+    public class EncurtarTest
     {
         private readonly IEncurtarService _encurtarService;
 
-        public UnitTest1(IEncurtarService encurtarService)
+        public EncurtarTest(IEncurtarService encurtarService)
         {
             _encurtarService = encurtarService;
         }
