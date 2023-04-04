@@ -5,12 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Encurtador.API.Controllers
 {
-    public class EncurtadoController : BaseApiController
+    public class EncurtarController : BaseApiController
     {
         private readonly IEncurtarService _encurtarService;
         private readonly IConfiguration _configuration;
 
-        public EncurtadoController(IEncurtarService encurtarService, IConfiguration configuration)
+        public EncurtarController(IEncurtarService encurtarService, IConfiguration configuration)
         {
             _encurtarService = encurtarService;
             _configuration = configuration;
